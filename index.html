@@ -209,6 +209,57 @@ footer span{color:var(--purple2);font-weight:600}
 /* FLOATING 3D SHAPES */
 .float-shape{position:fixed;pointer-events:none;z-index:1;opacity:.15}
 
+/* PROJECTS */
+#projects{text-align:center}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.proj-card{
+  background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:22px;
+  padding:32px 28px;text-align:left;
+  transition:all .25s;transform-style:preserve-3d;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:16px;
+}
+.proj-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 0% 0%,rgba(124,58,237,.13) 0%,transparent 60%);
+  opacity:0;transition:.35s;
+}
+.proj-card:hover{border-color:rgba(139,92,246,.55);transform:translateY(-10px) rotateX(5deg) rotateY(-3deg);box-shadow:0 28px 70px rgba(124,58,237,.3)}
+.proj-card:hover::before{opacity:1}
+
+.proj-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.proj-icon{
+  width:52px;height:52px;border-radius:16px;
+  display:grid;place-items:center;font-size:24px;flex-shrink:0;
+  box-shadow:0 6px 24px rgba(124,58,237,.4);
+  transition:.25s;
+}
+.proj-card:hover .proj-icon{transform:translateZ(20px) scale(1.12) rotate(-5deg)}
+.proj-icon-1{background:linear-gradient(135deg,#7c3aed,#06b6d4)}
+.proj-icon-2{background:linear-gradient(135deg,#06b6d4,#10b981)}
+.proj-icon-3{background:linear-gradient(135deg,#ec4899,#7c3aed)}
+
+.proj-badge{
+  padding:5px 13px;border-radius:100px;font-size:11px;font-weight:700;
+  letter-spacing:.07em;white-space:nowrap;
+}
+.badge-web{background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.4);color:var(--purple2)}
+.badge-data{background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.4);color:var(--cyan2)}
+.badge-ai{background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.4);color:#f9a8d4}
+
+.proj-title{font-size:18px;font-weight:800;color:var(--text);line-height:1.2}
+.proj-desc{font-size:14px;color:var(--muted);line-height:1.8;flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.ptag{padding:5px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:100px;font-size:12px;color:var(--muted);transition:.2s}
+.ptag:hover{border-color:var(--purple2);color:var(--text)}
+
+.proj-link{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 18px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);
+  border-radius:100px;font-size:13px;font-weight:600;color:var(--purple2);
+  text-decoration:none;transition:.2s;width:fit-content;
+}
+.proj-link:hover{background:rgba(124,58,237,.3);border-color:var(--purple2);transform:translateX(4px)}
+
 /* RESPONSIVE */
 @media(max-width:900px){
   nav{padding:14px 20px}.nav-links{display:none}
@@ -217,11 +268,13 @@ footer span{color:var(--purple2);font-weight:600}
   .about-grid{grid-template-columns:1fr}
   .skills-grid{grid-template-columns:1fr 1fr}
   .contact-grid{grid-template-columns:1fr 1fr}
+  .projects-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .skills-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
   .about-cards{grid-template-columns:1fr 1fr}
+  .projects-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -239,6 +292,7 @@ footer span{color:var(--purple2);font-weight:600}
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
   </div>
@@ -269,9 +323,9 @@ footer span{color:var(--purple2);font-weight:600}
   <p class="hero-tagline"><span>Web Developer</span> · <span>AI Enthusiast</span> · <span>CS Student</span></p>
   <p class="hero-quote">"I build web applications and AI-based solutions."</p>
   <div class="hero-cta">
-    <a href="#skills" class="btn-cta-main">
+    <a href="#projects" class="btn-cta-main">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      View Skills
+      View Projects
     </a>
     <a href="#contact" class="btn-cta-ghost">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
@@ -373,6 +427,75 @@ footer span{color:var(--purple2);font-weight:600}
         <span class="stag">Problem Solving</span><span class="stag">Debugging</span><span class="stag">Adaptability</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <h2 class="sec-title reveal">Projects I've built</h2>
+  <p class="reveal" style="color:var(--muted);font-size:16px;max-width:500px;margin:-28px auto 48px;line-height:1.8">Real-world problems, solved with code. Here's what I've been building.</p>
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="proj-card card-3d reveal">
+      <div class="proj-top">
+        <div class="proj-icon proj-icon-1">🚌</div>
+        <span class="proj-badge badge-web">Web App</span>
+      </div>
+      <div class="proj-title">Chennai Bus Route Finder</div>
+      <div class="proj-desc">A web-based application to help users find Chennai bus routes efficiently. Built with a clean UI and structured data handling, focused on usability and real-world problem solving.</div>
+      <div class="proj-tags">
+        <span class="ptag">JavaScript</span>
+        <span class="ptag">HTML</span>
+        <span class="ptag">CSS</span>
+        <span class="ptag">Data Handling</span>
+      </div>
+      <a href="https://github.com/poojasri-web" target="_blank" class="proj-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="proj-card card-3d reveal">
+      <div class="proj-top">
+        <div class="proj-icon proj-icon-2">📊</div>
+        <span class="proj-badge badge-data">Data Analytics</span>
+      </div>
+      <div class="proj-title">Expense Tracker & Visualizer</div>
+      <div class="proj-desc">A data analysis web app that tracks and visualizes personal expenses, helping users understand their spending patterns through interactive charts and insights.</div>
+      <div class="proj-tags">
+        <span class="ptag">Python</span>
+        <span class="ptag">JavaScript</span>
+        <span class="ptag">Data Viz</span>
+        <span class="ptag">HTML/CSS</span>
+      </div>
+      <a href="https://github.com/poojasri-web" target="_blank" class="proj-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="proj-card card-3d reveal">
+      <div class="proj-top">
+        <div class="proj-icon proj-icon-3">🖐</div>
+        <span class="proj-badge badge-ai">AI / Computer Vision</span>
+      </div>
+      <div class="proj-title">Hand Gesture Mouse Control</div>
+      <div class="proj-desc">An AI-based project that allows users to control the mouse using hand gestures via webcam — improving accessibility and interaction using computer vision techniques.</div>
+      <div class="proj-tags">
+        <span class="ptag">Python</span>
+        <span class="ptag">OpenCV</span>
+        <span class="ptag">MediaPipe</span>
+        <span class="ptag">AI/ML</span>
+      </div>
+      <a href="https://github.com/poojasri-web" target="_blank" class="proj-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
   </div>
 </section>
 
